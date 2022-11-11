@@ -33,5 +33,4 @@ public class AsteroidSpawner : MonoBehaviour
             asteroid.SetTrajectory(trajectory);
         }
     }
-
 }

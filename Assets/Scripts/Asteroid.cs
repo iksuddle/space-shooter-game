@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Asteroid : MonoBehaviour
 {
-    public new Rigidbody2D rigidbody { get; private set; }
+    public Rigidbody2D rb { get; private set; }
     public SpriteRenderer spriteRenderer { get; private set; }
     public Sprite[] sprites;
 
@@ -17,7 +17,7 @@ public class Asteroid : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -26,13 +26,13 @@ public class Asteroid : MonoBehaviour
         transform.eulerAngles = new Vector3(0f, 0f, Random.value * 360f);
 
         transform.localScale = Vector3.one * size;
-        rigidbody.mass = size;
+        rb.mass = size;
 
         Destroy(gameObject, maxLifetime);
     }
 
     public void SetTrajectory(Vector2 direction)
     {
-        rigidbody.AddForce(direction * movementSpeed);
+        rb.AddForce(direction * movementSpeed);
     }
 }

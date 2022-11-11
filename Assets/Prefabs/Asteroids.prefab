@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 2.18, y: 2.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2765393896099988156
@@ -147,10 +147,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: a64090e59960ffb4685ad4ec4deb9419, type: 3}
-  - {fileID: 21300000, guid: ac5321e799201374e8ec7ce5c1687917, type: 3}
-  - {fileID: 21300000, guid: 64a6fa292f7ca114cbc4694edf66b06d, type: 3}
-  - {fileID: 21300000, guid: 7b882280a8059444a9a41e17513cc8bc, type: 3}
+  - {fileID: 21300000, guid: 6e2566ee896c3474c85140f999d899f6, type: 3}
+  - {fileID: 21300000, guid: f4a0dcf738906b0499042d875690e7c9, type: 3}
+  - {fileID: 21300000, guid: 20d7044eed117a24b849b6ab6b3b3159, type: 3}
+  - {fileID: 21300000, guid: 5b2e1c2a26dd2f74a816362fe8fdb3fb, type: 3}
   size: 1
   minSize: 0.35
   maxSize: 1.65
