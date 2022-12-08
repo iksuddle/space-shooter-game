@@ -1,38 +1,52 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Rigidbody2D))]
-public class Asteroid : MonoBehaviour
+public class Asteroid : MonoBehaviour, IDamageable
 {
-    public Rigidbody2D rb { get; private set; }
-    public SpriteRenderer spriteRenderer { get; private set; }
-    public Sprite[] sprites;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float lifeTime;
 
-    public float size = 1f;
-    public float minSize = 0.35f;
-    public float maxSize = 1.65f;
-    public float movementSpeed = 50f;
-    public float maxLifetime = 30f;
+    private Rigidbody2D rb;
+
+    private float health;
+    private float timeAlive;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
-    {
-        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
-        transform.eulerAngles = new Vector3(0f, 0f, Random.value * 360f);
-
-        transform.localScale = Vector3.one * size;
-        rb.mass = size;
-
-        Destroy(gameObject, maxLifetime);
+    private void Start() {
+        health = maxHealth;
     }
 
-    public void SetTrajectory(Vector2 direction)
+    private void Update()
     {
-        rb.AddForce(direction * movementSpeed);
+        timeAlive += Time.deltaTime;
+
+        if (timeAlive >= lifeTime)
+            Destroy(gameObject);
+
+        if (LevelManager.Instance.LevelComplete)
+            Destroy(gameObject);
+    }
+
+    private void DestroyAsteroid() 
+    {
+        // spawn fx
+        LevelManager.Instance.OnEnemyShot();
+        Destroy(gameObject);
+    }
+
+    public void SetTrajectory(Vector2 direction, float speed)
+    {
+        rb.AddForce(direction * speed);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0f) {
+            DestroyAsteroid();
+        }
     }
 }
