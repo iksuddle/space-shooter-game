@@ -17,9 +17,8 @@ public class LevelManager : MonoBehaviour {
 
     public static LevelManager Instance {
         get {
-            instance = FindObjectOfType<LevelManager>();
             if (instance == null) {
-                Debug.LogError("LevelManager instance does not exist!");
+                instance = FindObjectOfType<LevelManager>();
             }
             return instance;
         }

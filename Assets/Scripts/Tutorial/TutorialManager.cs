@@ -7,6 +7,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject[] texts;
     [SerializeField] private Transform playerTransform;
 
+    private bool loadingNextLevel;
+
     // movement stage
     private Vector2 pressed = Vector2.zero;
 
@@ -67,9 +69,14 @@ public class TutorialManager : MonoBehaviour
     }
 
     private void Complete() {
-        Debug.Log("Tutorial Complete!");
+        if (!loadingNextLevel) {
+            Invoke(nameof(LoadNextLevel), 3f);
+            loadingNextLevel = true;
+        }
+    }
 
-        // todo: go to first level
+    private void LoadNextLevel() {
+        LoadLevelManager.Instance.LoadNextScene();
     }
 
     private void ChangeStage(int newStage) {
