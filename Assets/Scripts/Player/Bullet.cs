@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
     {
         if (col.tag == "Obstacle") {
             col.GetComponent<IDamageable>()?.TakeDamage(damage);
-            Destroy(gameObject);
+            Destroy(gameObject, 0.01f);
         }
     }
 }

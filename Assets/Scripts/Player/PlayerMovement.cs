@@ -36,4 +36,11 @@ public class PlayerMovement : MonoBehaviour {
         Vector3 difference = mouseWorldPos - transform.position;
         return Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 90f;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.tag == "Obstacle") {
+            LevelManager.Instance.OnPlayerDeath();
+            Destroy(gameObject);
+        }
+    }
 }

@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 1824596510}
   playerPrefab: {fileID: 1763670640868896386, guid: 8578da8af70744abaaa9b400b5d82f92, type: 3}
-  scoreToBeat: 5
+  scoreToBeat: 10
   resetDelay: 3
 --- !u!114 &1821448090
 MonoBehaviour:
@@ -412,12 +412,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 5036910656720924060, guid: bcbf351cb4e8745389b86b2c20033a21, type: 3}
   spawnDistance: 15
-  spawnInterval: 2
+  spawnInterval: 1
   numberPerSpawn: 1
   minScale: 1
   maxScale: 2
-  minSpeed: 100
-  maxSpeed: 150
+  minSpeed: 150
+  maxSpeed: 200
 --- !u!1 &1824596508
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +589,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.017616993, g: 0, b: 0.1509434, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.3137255, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

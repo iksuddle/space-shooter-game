@@ -24,6 +24,7 @@ public class AsteroidSpawner : MonoBehaviour
     private void SpawnAsteroids()
     {
         if (LevelManager.Instance.LevelComplete) return;
+        if (LevelManager.Instance.ResettingLevel) return;
 
         for (int i = 0; i < numberPerSpawn; i++)
         {
