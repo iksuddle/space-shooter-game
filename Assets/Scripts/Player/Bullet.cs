@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     [SerializeField] private float damage = 20;
+    [SerializeField] private GameObject bulletFX;
 
     private void Start() => Destroy(gameObject, 2f);
 
@@ -9,7 +10,10 @@ public class Bullet : MonoBehaviour {
     {
         if (col.tag == "Obstacle") {
             col.GetComponent<IDamageable>()?.TakeDamage(damage);
-            Destroy(gameObject, 0.01f);
+
+            Instantiate(bulletFX, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
     }
 }

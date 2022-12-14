@@ -221,5 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0ea81a08719e44dad483ca50087641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidDestroyFX: {fileID: 4668523159642163394, guid: b1e598ba8d3213b4c8666a7af2e45024, type: 3}
   maxHealth: 100
   lifeTime: 10

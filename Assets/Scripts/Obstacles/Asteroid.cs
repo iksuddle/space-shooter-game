@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour, IDamageable
 {
+    [SerializeField] private GameObject asteroidDestroyFX;
     [SerializeField] private float maxHealth;
     [SerializeField] private float lifeTime;
 
@@ -34,6 +35,8 @@ public class Asteroid : MonoBehaviour, IDamageable
     {
         // spawn fx
         LevelManager.Instance.OnEnemyShot();
+        var go = Instantiate(asteroidDestroyFX, transform.position, Quaternion.identity);
+        go.transform.localScale = transform.localScale;
         Destroy(gameObject);
     }
 

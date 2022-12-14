@@ -84,7 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d3ab5e4c81b413e8bb8b53be4a138b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 25
+  bulletFX: {fileID: 4668523159642163394, guid: b97b757cbca28f747a2dff66f9b69f4b, type: 3}
 --- !u!1 &8664083130192992065
 GameObject:
   m_ObjectHideFlags: 0

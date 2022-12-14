@@ -1,20 +1,32 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.LowLevel;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
-    [SerializeField] private TMP_Text scoreUI;
+    [Header("References")]
     [SerializeField] private GameObject playerPrefab;
-    [Space]
-    [SerializeField] private int scoreToBeat;
+    [Header("UI Elements")]
+    [SerializeField] private TMP_Text enemiesLeftText;
+    [SerializeField] private TMP_Text currentScoreText;
+    [SerializeField] private TMP_Text highestScoreText;
+    [SerializeField] private Image timeSinceLastKillWindow;
+    [Header("Settings")]
+    [SerializeField] private int enemiesLeft;
     [SerializeField] private float resetDelay;
+    [SerializeField] private float timeForScoreBoost;
+    [SerializeField] private string highScoreSaveKey;
+
 
     public bool ResettingLevel { get; private set; }
     public bool LevelComplete { get; private set; }
-    public int CurrentScore { get; private set; }
+    public int EnemiesDestroyed { get; private set; }
+
+    private float timeSinceLastEnemyKilled;
+    
+    private int score;
+    private int highestScore;
 
     private bool loadingNextLevel;
 
@@ -40,13 +52,34 @@ public class LevelManager : MonoBehaviour {
     private void Start() {
         LevelComplete = false;
         UpdateScoreUI(0);
+        highestScore = PlayerPrefs.GetInt(highScoreSaveKey);
+        highestScoreText.text = $"Highest: {highestScore}";
+    }
+
+    private void Update() {
+        timeSinceLastEnemyKilled += Time.deltaTime;
+        if (!LevelComplete || ResettingLevel) {
+            var targetFillAmount = 1 - (timeSinceLastEnemyKilled / timeForScoreBoost);
+            timeSinceLastKillWindow.fillAmount = Mathf.Lerp(timeSinceLastKillWindow.fillAmount, targetFillAmount, Time.deltaTime * 10f);
+        }
     }
 
     public void OnPlayerDeath() {
         StartCoroutine(nameof(ResetLevel));
+        SetHighScore();
+        score = 0;
     }
 
-    IEnumerator ResetLevel() {
+    private void SetHighScore() {
+        if (score >= highestScore) {
+            PlayerPrefs.SetInt(highScoreSaveKey, score);
+            highestScore = score;
+        }
+
+        highestScoreText.text = $"Highest: {highestScore}";
+    }
+
+    private IEnumerator ResetLevel() {
         ResettingLevel = true;
         // destroy all asteroids
         Asteroid[] asteroids = FindObjectsOfType<Asteroid>();
@@ -55,26 +88,27 @@ public class LevelManager : MonoBehaviour {
         // wait 
         yield return new WaitForSeconds(resetDelay);
         // reset score
-        CurrentScore = 0;
-        UpdateScoreUI(CurrentScore);
+        EnemiesDestroyed = 0;
+        UpdateScoreUI(EnemiesDestroyed);
         // respawn player
         Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
         ResettingLevel = false;
     }
 
     public void OnEnemyShot() {
-        CurrentScore++;
-        UpdateScoreUI(CurrentScore);
-        if (CurrentScore >= scoreToBeat)
+        if (timeSinceLastEnemyKilled <= timeForScoreBoost)
+            score *= 2;
+        score += 30;
+        timeSinceLastEnemyKilled = 0f;
+        EnemiesDestroyed++;
+        UpdateScoreUI(EnemiesDestroyed);
+        if (EnemiesDestroyed >= enemiesLeft)
             OnLevelComplete();
-    }
-
-    private void UpdateScoreUI(int newScore) {
-        scoreUI.text = $"{scoreToBeat - newScore}";
     }
 
     private void OnLevelComplete() {
         LevelComplete = true;
+        SetHighScore();
         if (!loadingNextLevel) {
             loadingNextLevel = true;
             Invoke(nameof(LoadNextLevel), 2f);
@@ -83,5 +117,10 @@ public class LevelManager : MonoBehaviour {
 
     private void LoadNextLevel() {
         LoadLevelManager.Instance.LoadNextScene();
+    }
+
+    private void UpdateScoreUI(int newScore) {
+        enemiesLeftText.text = $"{enemiesLeft - newScore}";
+        currentScoreText.text = $"Score: {score}";
     }
 }

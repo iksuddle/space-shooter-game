@@ -17,8 +17,11 @@ public class LoadLevelManager : MonoBehaviour {
     }
 
     private void Awake() {
-        if (instance != null) Destroy(this);
-        DontDestroyOnLoad(this);
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     #endregion
