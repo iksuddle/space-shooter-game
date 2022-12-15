@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Asteroid Spawner is responsible for spawning asteroids randomly and directing them at the player
+/// </summary>
 public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject asteroidPrefab;
@@ -16,11 +17,17 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private float minSpeed;
     [SerializeField] private float maxSpeed;
 
+    /// <summary>
+    /// Start method invokes the SpawnAsteroids method based on configured interval
+    /// </summary>
     private void Start()
     {
         InvokeRepeating(nameof(SpawnAsteroids), spawnInterval, spawnInterval);
     }
 
+    /// <summary>
+    /// SpawnAsteroids spawns asteroids randomly based on the configured fields
+    /// </summary>
     private void SpawnAsteroids()
     {
         if (LevelManager.Instance.LevelComplete) return;

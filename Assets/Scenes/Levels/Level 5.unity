@@ -874,6 +874,8 @@ MonoBehaviour:
   enemiesLeft: 20
   resetDelay: 3
   timeForScoreBoost: 1
+  fireRateOnSpawn: 400
+  bulletForceOnSpawn: 20
   highScoreSaveKey: highscore5
 --- !u!114 &1821448090
 MonoBehaviour:

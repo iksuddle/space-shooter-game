@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ScreenBound module enables objects to reappear at the other and of the screen
+/// </summary>
 public class ScreenBound : MonoBehaviour {
     
     [Header("Screen Bound Object Settings")]
@@ -11,6 +14,9 @@ public class ScreenBound : MonoBehaviour {
     private float topBorder;
     private float bottomBorder;
 
+    /// <summary>
+    /// Awake method assigns the mainCamera 
+    /// </summary>
     private void Awake() {
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -18,6 +24,9 @@ public class ScreenBound : MonoBehaviour {
             Debug.LogError("Assign Main Camera field in inspector.");
     }
 
+    /// <summary>
+    /// Start method initializes fields for border calculation
+    /// </summary>
     private void Start() {
         topBorder = mainCamera.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f)).y;
         rightBorder = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;
@@ -25,6 +34,9 @@ public class ScreenBound : MonoBehaviour {
         leftBorder = mainCamera.ScreenToWorldPoint(Vector3.zero).x;
     }
 
+    /// <summary>
+    /// Update method handles logic for teleporting the player to other end of screen
+    /// </summary>
     private void Update() {
         // left border
         if (transform.position.x < leftBorder - buffer)

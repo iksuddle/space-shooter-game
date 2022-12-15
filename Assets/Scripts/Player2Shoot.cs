@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Player2Shoot WIP
+/// </summary>
 public class Player2Shoot : MonoBehaviour {
     
     [Header("References")]

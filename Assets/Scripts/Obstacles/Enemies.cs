@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy space ship object
+/// WIP
+/// </summary>
 public class Enemies : MonoBehaviour
 {
     public Rigidbody2D rb;

@@ -532,6 +532,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1763670640908773829, guid: 8578da8af70744abaaa9b400b5d82f92, type: 3}
+      propertyPath: fireRate
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763670640908773829, guid: 8578da8af70744abaaa9b400b5d82f92, type: 3}
+      propertyPath: bulletForce
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8578da8af70744abaaa9b400b5d82f92, type: 3}
 --- !u!1 &603192493
@@ -950,6 +958,8 @@ MonoBehaviour:
   enemiesLeft: 15
   resetDelay: 3
   timeForScoreBoost: 2
+  fireRateOnSpawn: 350
+  bulletForceOnSpawn: 20
   highScoreSaveKey: highscore3
 --- !u!114 &1821448090
 MonoBehaviour:
